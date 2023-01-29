@@ -17,6 +17,7 @@ const client = new ApolloClient({
   headers: {
     Authorization: getCookie("token"),
   },
+  credentials: "same-origin",
   connectToDevTools: true,
 });
 
