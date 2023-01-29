@@ -1,4 +1,4 @@
-import { Table, Tag, Space, Select } from "antd";
+import { Table, Tag, Space, Select, Spin } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { CalendarTwoTone } from "@ant-design/icons";
 import "./styles.css";
@@ -86,6 +86,7 @@ const TableComp = ({
   setSearchParams,
   appointmentStatus: appointmentStatusFromParams,
   authStatus: authStatusFromParams,
+  loading,
 }: any) => {
   const [page, setPage] = useState<number>(pageNumber);
   const [limit, setLimit] = useState<number>(limitNumber);
@@ -155,7 +156,7 @@ const TableComp = ({
       appointmentStart: doc?.appointmentStart,
       appointmentStatus: doc?.appointmentStatus,
       tag: doc?.tag,
-      key: doc?.appointmentId
+      key: doc?.appointmentId,
     });
   });
 
@@ -173,7 +174,7 @@ const TableComp = ({
     });
   };
 
-  return tableList?.length ? (
+  return (
     <div className="priorAuthTable">
       <h1>Prio Auth</h1>
       <Space wrap>
@@ -200,23 +201,34 @@ const TableComp = ({
           }))}
         />
       </Space>
-      <Table
-        rowSelection={{
-          type: "checkbox",
-          ...rowSelection,
-        }}
-        columns={columns}
-        dataSource={tableList}
-        pagination={{
-          pageSize: limit,
-          current: page,
-          total: pages,
-          onChange: handleChange,
-        }}
-      />
+      {loading ? (
+        <Spin
+          style={{
+            position: "absolute",
+            top: " 50%",
+            right: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        />
+      ) : tableList?.length ? (
+        <Table
+          rowSelection={{
+            type: "checkbox",
+            ...rowSelection,
+          }}
+          columns={columns}
+          dataSource={tableList}
+          pagination={{
+            pageSize: limit,
+            current: page,
+            total: pages,
+            onChange: handleChange,
+          }}
+        />
+      ) : (
+        <div>No Data found for selected filters.</div>
+      )}
     </div>
-  ) : (
-    <></>
   );
 };
 

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { PRIOR_AUTH_LIST } from "./fetchPriorAuthList";
 import { useSearchParams } from "react-router-dom";
 import Preview from "./preview";
-import { Spin } from "antd";
 import PriodAuthTable from "./priorAuthTable";
 
 interface DataType {
@@ -47,16 +46,6 @@ const PriorAuthList = (props: any) => {
 
   return (
     <div>
-      {loading ? (
-        <Spin
-          style={{
-            position: "absolute",
-            top: " 50%",
-            right: "50%",
-            transform: "translate(-50%,-50%)",
-          }}
-        />
-      ) : (
         <div className="prioAuthcontainer">
           <div className="filterContainer"></div>
           <PriodAuthTable
@@ -65,10 +54,10 @@ const PriorAuthList = (props: any) => {
             setSearchParams={setSearchParams}
             pageNumber={pageNumber}
             limitNumber={limitNumber}
+            loading={loading}
           />
           {selectedItem ? <Preview selectedItem={selectedItem} /> : <></>}
         </div>
-      )}
     </div>
   );
 };
