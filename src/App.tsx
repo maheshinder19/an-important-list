@@ -1,16 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
+import PriorAuthList from "./Pages/prior-auth-list";
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <PriorAuthList/>,
+    },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-       
-         Hola ALLL
-      </header>
-    </div>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
 }
 
