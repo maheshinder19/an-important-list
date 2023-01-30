@@ -8,14 +8,14 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql,
 } from "@apollo/client";
+import { token } from "./utils/constants";
 
 const client = new ApolloClient({
   uri: "https://graph.dev.jit.care/graphql",
   cache: new InMemoryCache(),
   headers: {
-    Authorization: getCookie("token"),
+    Authorization: getCookie("token") || token,
   },
   credentials: "same-origin",
   connectToDevTools: true,
