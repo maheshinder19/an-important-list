@@ -176,7 +176,7 @@ const TableComp = ({
 
   return (
     <div className="priorAuthTable">
-      <h1>Prio Auth</h1>
+      <h1>Prior Auth</h1>
       <Space wrap>
         <Select
           placeholder="Appointment Status"
